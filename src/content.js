@@ -216,7 +216,12 @@ const handleContextMenuMessage = (request, sender, sendResponse) => {
 };
 
 // Event listeners
-document.addEventListener("click", handleInputClick, true);
-chrome.runtime.onMessage.addListener(handleContextMenuMessage);
 
-console.log("CPF/CNPJ Generator Extension loaded!");
+if (typeof document !== "undefined") {
+  document.addEventListener("click", handleInputClick, true);
+  chrome.runtime.onMessage.addListener(handleContextMenuMessage);
+  console.log("CPF/CNPJ Generator Extension loaded!");
+}
+
+// Exporta para testes (Node.js/Vitest)
+export { randomNum, generateCPF, generateCNPJ, formatCPF, formatCNPJ };
