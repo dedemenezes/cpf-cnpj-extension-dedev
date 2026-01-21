@@ -224,4 +224,12 @@ if (typeof document !== "undefined") {
 }
 
 // Exporta para testes (Node.js/Vitest)
-export { randomNum, generateCPF, generateCNPJ, formatCPF, formatCNPJ };
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    randomNum,
+    generateCPF,
+    generateCNPJ,
+    formatCPF,
+    formatCNPJ,
+  };
+}
