@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Gerador de CPF/CNPJ",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Gera CPF ou CNPJ automaticamente ao clicar em campos específicos",
   "permissions": [
     "activeTab",
