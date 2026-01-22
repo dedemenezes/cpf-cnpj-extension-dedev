@@ -84,52 +84,6 @@ const copyToClipboard = (text) => {
     });
 };
 
-// Find label associated with input element
-const findLabel = (element) => {
-  // Try to find label using 'for' attribute
-  if (element.id) {
-    const label = document.querySelector(`label[for="${element.id}"]`);
-    if (label) {
-      return label.textContent.toLowerCase();
-    }
-  }
-
-  // Try to find parent label
-  const parentLabel = element.closest("label");
-  if (parentLabel) {
-    return parentLabel.textContent.toLowerCase();
-  }
-
-  // Try to find previous sibling label
-  let previous = element.previousElementSibling;
-  while (previous) {
-    if (previous.tagName === "LABEL") {
-      return previous.textContent.toLowerCase();
-    }
-    previous = previous.previousElementSibling;
-  }
-
-  return "";
-};
-
-// Verify if input is CPF or CNPJ type
-const verifyInputType = (element) => {
-  const label = findLabel(element);
-  const placeholder = element.placeholder?.toLowerCase() || "";
-  const name = element.name?.toLowerCase() || "";
-  const id = element.id?.toLowerCase() || "";
-
-  const combinedText = [label, placeholder, name, id].join(" ").toLowerCase();
-
-  if (combinedText.includes("cpf")) {
-    return "cpf";
-  } else if (combinedText.includes("cnpj")) {
-    return "cnpj";
-  }
-
-  return null;
-};
-
 // Check if element is editable input
 const isEditableInput = (element) => {
   return (
