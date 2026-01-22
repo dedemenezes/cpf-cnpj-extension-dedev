@@ -147,6 +147,26 @@ const addVisualFeedback = (element, color = "#4CAF50") => {
   }, 500);
 };
 
+const showToast = (message) => {
+  const toast = document.createElement("div");
+  toast.textContent = message;
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgb(142, 86, 245);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 14px
+    z-index: 10000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+};
+
 // Dispatch events for framework compatibility (Vue, React, etc)
 const dispatchFrameworkEvents = (element) => {
   element.dispatchEvent(new Event("input", { bubbles: true }));
@@ -163,7 +183,6 @@ const fillInput = (element, formattedNumber, color) => {
   updateInputValue(element, formattedNumber);
   copyToClipboard(formattedNumber);
   dispatchFrameworkEvents(element);
-  addVisualFeedback(element, color);
 };
 
 // Generate and fill with appropriate document type
@@ -173,26 +192,9 @@ const generateAndFill = (element, type) => {
   const color = type === "cpf" ? "#4CAF50" : "#2196F3";
 
   fillInput(element, formatted, color);
-};
 
-// Show confirmation dialog
-const confirmGeneration = (type) => {
-  const typeUpper = type.toUpperCase();
-  return confirm(`Deseja gerar um ${typeUpper} válido para este campo?`);
-};
-
-// Handle click on input fields
-const handleInputClick = (event) => {
-  const element = event.target;
-
-  if (!isEditableInput(element)) return;
-
-  const type = verifyInputType(element);
-  if (!type) return;
-
-  if (confirmGeneration(type)) {
-    generateAndFill(element, type);
-  }
+  addVisualFeedback(element, color);
+  showToast(`${type.toUpperCase()} gerado e copiado!`);
 };
 
 // Handle context menu messages
@@ -218,7 +220,6 @@ const handleContextMenuMessage = (request, sender, sendResponse) => {
 // Event listeners
 
 if (typeof document !== "undefined") {
-  document.addEventListener("click", handleInputClick, true);
   chrome.runtime.onMessage.addListener(handleContextMenuMessage);
   console.log("CPF/CNPJ Generator Extension loaded!");
 }
