@@ -26,5 +26,21 @@
     "16": "icon16.png",
     "48": "icon48.png",
     "128": "icon128.png"
+  },
+  "commands": {
+    "generate-cpf": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      },
+      "description": "Gerar CPF no campo focado"
+    },
+    "generate-cnpj": {
+      "suggested_key": {
+        "default": "Ctrl+J",
+        "mac": "Command+J"
+      },
+      "description": "Gerar CNPJ no campo focado"
+    }
   }
 }
