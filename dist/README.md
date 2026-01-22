@@ -208,6 +208,6 @@ Problemas ou dúvidas?
 
 **Desenvolvido com ❤️ para facilitar testes**
 
-Versão 1.0.0 | Janeiro 2024
+Versão 1.0.0 | Janeiro 2026
 
 </div>
